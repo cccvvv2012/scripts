@@ -1,5 +1,8 @@
 #!/bin/bash
+
+# username
 uname=lanc09
+# md5 of password
 pass=
 
 do_login() {
