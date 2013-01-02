@@ -1,0 +1,16 @@
+#/bin/sh
+NAME=gif0
+SERVER=59.66.4.50
+LOCAL=192.168.1.23
+DORM=59.66.131.57
+PREFIX_GLOBAL=2001:da8:200:900e:0:5efe
+PREFIX_LINK=fe80::200:5efe
+
+#ip tunnel add "$NAME" mode sit remote "$SERVER" local "$LOCAL"
+ifconfig "$NAME" create
+ifconfig "$NAME" tunnel "$LOCAL" "$SERVER"
+#ifconfig sit1 add "$PREFIX_GLOBAL":"$DORM"/64
+#ifconfig sit1 add "$PREFIX_LINK":"$DORM"/64
+ifconfig "$NAME" inet6 "$PREFIX_GLOBAL":"$DORM" prefixlen 64
+ifconfig "$NAME" inet6 "$PREFIX_LINK":"$DORM" prefixlen 64
+route add -inet6 default 2001:da8:200:900e::1
